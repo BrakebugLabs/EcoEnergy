@@ -1,35 +1,36 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
-  "framework": "tanstack-start", 
+  "outputDirectory": ".output",
+  "framework": "tanstack-start",
   "rewrites": [
     {
       "source": "/sw.js",
-      "destination": "/sw.js"
+      "destination": "/public/sw.js"
     },
     {
       "source": "/manifest.webmanifest",
-      "destination": "/manifest.webmanifest"
+      "destination": "/public/manifest.webmanifest"
     },
     {
       "source": "/icon-192.png",
-      "destination": "/icon-192.png"
+      "destination": "/public/icon-192.png"
     },
     {
       "source": "/icon-512.png",
-      "destination": "/icon-512.png"
+      "destination": "/public/icon-512.png"
     },
     {
       "source": "/screenshots/(.*)",
-      "destination": "/screenshots/$1"
+      "destination": "/public/screenshots/$1"
     },
     {
       "source": "/docs/(.*)",
-      "destination": "/docs/$1"
+      "destination": "/public/docs/$1"
     },
     {
       "source": "/assets/(.*)",
-      "destination": "/assets/$1"
+      "destination": "/public/assets/$1"
     },
     {
       "source": "/_server/(.*)",

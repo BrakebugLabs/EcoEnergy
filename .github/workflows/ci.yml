@@ -43,7 +43,7 @@ jobs:
         with:
           install: false
           build: npm run build
-          start: npm run dev
+          start: npm run dev -- --port 3001
           wait-on: "http://localhost:3001"
           wait-on-timeout: 120
           browser: chrome

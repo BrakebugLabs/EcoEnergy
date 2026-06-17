@@ -12,10 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
+
+      - uses: actions/setup-node@v4
         with:
-          bun-version: latest
-      - run: npm install --frozen-lockfile
+          node-version: "20"
+          cache: "npm" # Ativa cache automático de node_modules
+
+      # npm ci é o comando correto para ambientes de CI (usa o package-lock.json estrito)
+      - run: npm ci 
       - run: npm run lint
       - run: npm run build
 
@@ -25,22 +29,24 @@ jobs:
     needs: lint-build
     steps:
       - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
+
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-      - run: npm install --frozen-lockfile
+          cache: "npm"
+
+      - run: npm ci
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           install: false
           build: npm run build
-          start: npm run dev
+          start: npm run preview
           wait-on: "http://localhost:3001"
           wait-on-timeout: 120
           browser: chrome
+
       - uses: actions/upload-artifact@v4
         if: failure()
         with:

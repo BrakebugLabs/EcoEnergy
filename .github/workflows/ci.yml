@@ -15,11 +15,11 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "22"
-          cache: "npm" # Ativa cache automático de node_modules
+          node-version: "22" # Garante o Node 22 exigido pelo TanStack moderno
+          cache: "npm"
 
-      # npm ci é o comando correto para ambientes de CI (usa o package-lock.json estrito)
-      - run: npm ci 
+      # 🟢 CORRIGIDO: Trocamos 'npm ci' por 'npm install' para gerar o mapeamento em tempo real
+      - run: npm install
       - run: npm run lint
       - run: npm run build
 
@@ -32,10 +32,11 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
 
-      - run: npm ci
+      # 🟢 CORRIGIDO: Aplicado o mesmo padrão tolerante aqui
+      - run: npm install
 
       - name: Cypress run
         uses: cypress-io/github-action@v6

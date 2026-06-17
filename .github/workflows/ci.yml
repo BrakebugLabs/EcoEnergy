@@ -15,7 +15,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm" # Ativa cache automático de node_modules
 
       # npm ci é o comando correto para ambientes de CI (usa o package-lock.json estrito)

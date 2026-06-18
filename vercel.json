@@ -2,24 +2,6 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "framework": "tanstack-start",
-  "rewrites": [
-    {
-      "source": "/sw.js",
-      "destination": "/sw.js"
-    },
-    {
-      "source": "/manifest.webmanifest",
-      "destination": "/manifest.webmanifest"
-    },
-    {
-      "source": "/icon-192.png",
-      "destination": "/icon-192.png"
-    },
-    {
-      "source": "/icon-512.png",
-      "destination": "/icon-512.png"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*).(jpg|jpeg|gif|png|svg|ico|webp|js|css|woff|woff2)",

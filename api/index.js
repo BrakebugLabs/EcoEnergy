@@ -1,3 +1,4 @@
+/* global URL, Request, Buffer, console */
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 

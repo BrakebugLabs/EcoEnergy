@@ -24,6 +24,8 @@ interface AppState {
   editPrevious: () => void;
   editRecent: () => void;
   saveCurrentAnalysis: () => Promise<void>;
+  deleteAnalysis: (id: number) => Promise<void>;
+  clearHistory: () => Promise<void>;
   hydratePoints: () => Promise<void>;
 }
 
@@ -91,6 +93,18 @@ export const useAppStore = create<AppState>((set, get) => ({
     const total = await analysisRepository.totalPoints();
     const list = await analysisRepository.listRecent(12);
     set({ totalPoints: total, history: list, lastSaved: true });
+  },
+
+  deleteAnalysis: async (id) => {
+    await analysisRepository.deleteOne(id);
+    const total = await analysisRepository.totalPoints();
+    const list = await analysisRepository.listRecent(12);
+    set({ totalPoints: total, history: list });
+  },
+
+  clearHistory: async () => {
+    await analysisRepository.clearAll();
+    set({ totalPoints: 0, history: [], monthBalanceBRL: 0 });
   },
 
   hydratePoints: async () => {

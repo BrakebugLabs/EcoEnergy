@@ -20,12 +20,22 @@ export const analysisRepository = {
     const all = await db.analyses.toArray();
     return all.reduce((sum, a) => sum + a.earnedPoints, 0);
   },
+  async deleteOne(id: number): Promise<void> {
+    const db = getDB();
+    if (!db) return;
+    await db.analyses.delete(id);
+  },
+  async clearAll(): Promise<void> {
+    const db = getDB();
+    if (!db) return;
+    await db.analyses.clear();
+  },
 };
 
 export const userRepository = {
   async create(user: Omit<UserProfile, "id" | "createdAt">): Promise<number | null> {
     const db = getDB();
     if (!db) return null;
-    return (await db.users.add({ ...user, createdAt: Date.now() }));
+    return (await db.users.add({ ...user, createdAt: Date.now() })) as number;
   },
 };
